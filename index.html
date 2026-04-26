@@ -2,281 +2,770 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ハナソ高齢者の皆様とお話ししたい</title>
+  <title>hanaso｜高齢者向けお話し相手・見守り電話サービス</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="hanaso は、高齢者向けの電話お話し相手サービスです。孤独感の軽減や見守りを目的に、学生スタッフが丁寧にお話を伺います。初回15分無料。">
   <style>
-  .logo {
-  width: 160px;      /* ロゴの大きさ */
-  margin-bottom: 15px;
-  }
-
-  .service-name {
-  font-size: 36px;
-  margin-bottom: 20px;
-  }
-
-  .target-text {
-  font-size: 22px;
-  margin: 6px 0;
-  }
-
-  .sub-text {
-  font-size: 18px;
-  margin-top: 12px;
-  color: #555;
-  }
-body {
-      h1, h2 {
-    font-family:
-    "Hiragino Maru Gothic ProN",
-    "Noto Sans JP",
-    sans-serif;
+    :root {
+      --main: #2f7dbe;
+      --main-light: #e6f2fb;
+      --accent: #f6a623;
+      --bg: #f7f7f7;
+      --text: #333;
+      --muted: #777;
+      --danger: #c0392b;
+      --radius: 8px;
+      --shadow: 0 4px 12px rgba(0,0,0,0.06);
     }
-      background-color: #fff7ec;
-      color: #333;
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
       margin: 0;
-      line-height: 1.8;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
     }
+
+    a {
+      color: var(--main);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
     header {
-      background-color: #fff;
-      padding: 30px 20px;
-      text-align: center;
-      border-bottom: 1px solid #ddd;
+      background: white;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-    header h1 {
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--main);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--main);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+      transition: transform 0.05s ease-out, box-shadow 0.05s ease-out, background 0.15s;
+    }
+
+    .btn-primary {
+      background: var(--main);
+      color: white;
+      box-shadow: 0 4px 10px rgba(47,125,190,0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(47,125,190,0.4);
+    }
+
+    .btn-outline {
+      background: white;
+      color: var(--main);
+      border: 1px solid var(--main);
+    }
+
+    .btn-outline:hover {
+      background: var(--main-light);
+    }
+
+    main {
+      padding-bottom: 64px;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #fdfdfd, #eaf4ff);
+      padding: 40px 0 32px;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+      gap: 32px;
+      align-items: center;
+    }
+
+    .hero-title {
       font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .hero-title span {
+      color: var(--main);
+    }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: white;
+      border: 1px solid #e0e0e0;
+      color: var(--muted);
+    }
+
+    .badge-main {
+      border-color: var(--main);
+      color: var(--main);
+      background: #f3f8ff;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
       margin-bottom: 10px;
     }
-    header p {
-      font-size: 18px;
+
+    .hero-note {
+      font-size: 12px;
+      color: var(--muted);
     }
+
+    .hero-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+      font-size: 13px;
+    }
+
+    .hero-card-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .hero-card ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+
+    .hero-card li {
+      margin-bottom: 4px;
+    }
+
+    /* Sections */
     section {
-      background-color: #ffffff;
-       border-left: 6px solid #f4b6c2;
-      margin: 20px;
-      padding: 20px;
-      border-radius: 10px;
+      padding: 40px 0 24px;
     }
-    h2 {
+
+    section h2 {
       font-size: 22px;
-      border-left: 6px solid #f4b6c2;
-      padding-left: 10px;
-    }
-    ul {
-      padding-left: 20px;
-    }
-    li {
-      font-size: 18px;
       margin-bottom: 8px;
     }
-    .price {
-      font-size: 20px;
-      font-weight: bold;
-    }
-    footer {
-      text-align: center;
+
+    section p.lead {
+      color: var(--muted);
       font-size: 14px;
-      padding: 20px;
-      color: #666;
-    }
-   .flow {
-    padding-left: 20px;
+      margin-bottom: 24px;
     }
 
-   .flow li {
-   margin-bottom: 25px;
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
     }
 
-  .flow h3 {
-  margin-bottom: 5px;
-  font-size: 1.1em;
-  }
+    .card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      box-shadow: var(--shadow);
+      font-size: 14px;
+    }
 
-.note {
-  font-size: 1.5em;
-  color: #666;
-}
+    .card h3 {
+      font-size: 16px;
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
 
-.limited-message {
-  font-size: 1.5em;
-  color: #666;
-}
+    .card small {
+      color: var(--muted);
+      font-size: 12px;
+    }
 
-.payment-note {
-  font-size: 1.2em;
-  color: #555;
-  margin-top: 15px;
-}
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--main-light);
+      color: var(--main);
+      margin-left: 6px;
+    }
 
-.easy-flow {
-  list-style: none;
-  padding: 0;
-}
+    /* Pricing */
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      background: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: 12px;
+    }
 
-.easy-flow li {
-  margin-bottom: 25px;
-  padding: 15px;
-  background-color: #fff7f9;
-  border-radius: 10px;
-}
+    .pricing-table th,
+    .pricing-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #eee;
+      text-align: left;
+    }
 
-.step {
-  display: inline-block;
-  font-weight: bold;
-  color: #d36b8c;
-  margin-bottom: 8px;
-}
+    .pricing-table th {
+      background: #f5f8fc;
+      font-weight: 600;
+      font-size: 13px;
+    }
 
- </style>
+    .pricing-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .pricing-highlight {
+      color: var(--main);
+      font-weight: 600;
+    }
+
+    .pricing-note {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* Flow */
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    .flow-step {
+      background: white;
+      border-radius: var(--radius);
+      padding: 12px;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .flow-step-number {
+      font-size: 11px;
+      font-weight: 700;
+      color: white;
+      background: var(--main);
+      border-radius: 999px;
+      display: inline-block;
+      padding: 2px 8px;
+      margin-bottom: 6px;
+    }
+
+    .flow-step-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 13px;
+    }
+
+    /* FAQ */
+    .faq-item {
+      background: white;
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      box-shadow: var(--shadow);
+      font-size: 14px;
+    }
+
+    .faq-q {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .faq-a {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Profile */
+    .profile {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      font-size: 14px;
+    }
+
+    .profile-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--main-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--main);
+      font-size: 20px;
+    }
+
+    .profile-meta {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    /* CTA */
+    .cta {
+      background: white;
+      border-radius: var(--radius);
+      padding: 20px 18px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    .cta-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .cta-text {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid #e0e0e0;
+      padding: 16px 0 24px;
+      font-size: 12px;
+      color: var(--muted);
+      background: #fafafa;
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: underline;
+      font-size: 12px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+      .flow {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .flow {
+        grid-template-columns: 1fr;
+      }
+      .hero-title {
+        font-size: 24px;
+      }
+    }
+  </style>
 </head>
 <body>
 
 <header>
-  <img src="logo.png" alt="ハナソ ロゴ" class="logo">
-  <h1 class="service-name">ハナソ【HANASO】</h1>
-
-<p>おばあちゃん・おじいちゃんの優しいお話相手になります！</p>
+  <div class="container nav">
+    <div class="logo">hanaso</div>
+    <nav class="nav-links">
+      <a href="#about">サービス概要</a>
+      <a href="#pricing">料金</a>
+      <a href="#flow">ご利用の流れ</a>
+      <a href="#faq">よくある質問</a>
+      <a href="#contact">お申し込み</a>
+    </nav>
+    <a href="#contact" class="btn btn-outline">初回15分無料</a>
+   <a href="tel:080-8079-9969" class="btn btn-outline">
+      📞 080-8079-9969
+    </a>
+  </div>
 </header>
 
-<section>
-  <h2>サービスの想い</h2>
+<main>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div>
+        <div class="hero-title">
+          電話でつながる、<span>安心な毎日。</span><br>
+          高齢者向けお話し相手・見守りサービス
+        </div>
+        <p class="hero-sub">
+          「最近、親とゆっくり話せていない」「一人暮らしが心配」——  
+          hanaso は、そんなご家族の不安を少しでも軽くするための、<br>
+          <strong>学生による電話お話し相手・見守りサービス</strong>です。
+        </p>
+        <div class="hero-badges">
+          <span class="badge badge-main">初回15分 無料体験</span>
+          <span class="badge">土日限定（学業と両立）</span>
+          <span class="badge">個人情報は厳重に管理</span>
+          <span class="badge">ご家族への簡易レポートも可能</span>
+        </div>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">無料体験を申し込む</a>
+          <a href="#pricing" class="btn btn-outline">料金プランを見る</a>
+        </div>
+        <div class="hero-note">
+          ※現在は <strong>電話のみ</strong> の対応です。ビデオ通話には対応していません。
+        </div>
+      </div>
+      <div>
+        <div class="hero-card">
+          <div class="hero-card-title">こんな方におすすめです</div>
+          <ul>
+            <li>一人暮らしの親御さんが、最近「寂しい」と言うことが増えた</li>
+            <li>遠方に住んでいて、こまめに電話する時間がなかなか取れない</li>
+            <li>日々の様子を、第三者の目線でも知っておきたい</li>
+            <li>高齢の家族の「話し相手」「気分転換」を用意してあげたい</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <p>
-    ハナソは、ひとりで過ごす時間が多くなりがちな
-    おばあちゃん・おじいちゃんに、
-    やさしい会話の時間をお届けしたいという想いから生まれました。
-  </p>
-
-  <p>
-    特別な話題がなくても大丈夫です。
-    今日の出来事、昔のお話、ちょっとした世間話など、
-    安心してお話しいただける相手として寄り添います。
-  </p>
-
-  <p>
-    会話を通して、少しでも心があたたかくなり、
-    「誰かと話せてよかった」と感じていただけることを
-    大切にしています。
-  </p>
-</section>
-
-<section>
-  <h2>できること</h2>
-  <ul>
-    <li>決まった時間にお電話します</li>
-    <li>会話内容は自由です</li>
-    <li>秘密は守ります</li>
-  </ul>
-</section>
-
-<section>
-  <h2>初回お試し</h2>
-  <p>
-    はじめての方にも安心してご利用いただけるよう、
-    初回限定のお試し電話をご用意しています。
-  </p>
-  <ul>
-    <li>通話時間：15分</li>
-    <li>回数：1回</li>
-    <li>料金：無料</li>
-    <li>こちらからお電話します</li>
-  </ul>
-  <p>
-    お試し後、無理な勧誘はありませんのでご安心ください。
-  </p>
-</section>
-
-<section>
-  <h2>料金</h2>
-  <p class="price">週1回・15分：1800円／月</p>
-  <p class="price">週2回・15分：3500円／月</p>
-<p class="payment-note">
-  お支払いは、住信SBIネット銀行への銀行振込をお願いしております。<br>
-  振込先口座や金額の詳細は、お申し込み後に個別でご案内いたします。
-</p>
-</section>
-
-<section>
-  <h2>ご利用の流れ</h2>
-
-  <ol class="easy-flow">
-    <li>
-      <span class="step">STEP 1</span>
-      <p>
-        お問い合わせフォーム、またはお電話にてお申し込みください。
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <h2>サービス概要</h2>
+      <p class="lead">
+        hanaso は、高齢者の方と学生スタッフが電話でお話しするサービスです。  
+        「ただ話す」だけでなく、<strong>さりげない見守り</strong>や、<strong>ご家族への簡易報告</strong>も行います。
       </p>
-    </li>
 
-    <li>
-      <span class="step">STEP 2</span>
-      <p>
-        ご希望の曜日・時間帯をお伺いし、通話日時を決めます。
-        （現在は土曜・日曜のみ対応しております）
-      </p>
-    </li>
+      <div class="grid-2">
+        <div class="card">
+          <h3>お話し相手として</h3>
+          <p>
+            日常の出来事、昔の思い出、趣味の話など、特別なテーマがなくても大丈夫です。  
+            「今日は誰かと話したな」と感じてもらえる時間を大切にします。
+          </p>
+          <ul>
+            <li>雑談・世間話</li>
+            <li>昔話・思い出話</li>
+            <li>趣味やニュースの話題</li>
+            <li>軽い脳トレ（しりとり・簡単なクイズなど）</li>
+          </ul>
+        </div>
 
-    <li>
-      <span class="step">STEP 3</span>
-      <p>
-        ご案内した内容をご確認いただき、料金をお振り込みください。
-      </p>
-    </li>
+        <div class="card">
+          <h3>さりげない見守りとして<span class="tag">オプション</span></h3>
+          <p>
+            会話の中で、<strong>体調・生活リズム・気分の変化</strong>などをさりげなく確認します。  
+            必要に応じて、ご家族へ簡単なレポートをお送りします。
+          </p>
+          <ul>
+            <li>声の調子や息切れの様子</li>
+            <li>食事・睡眠のリズム</li>
+            <li>最近の外出状況</li>
+            <li>気分の落ち込みがないか など</li>
+          </ul>
+          <small>※医療・介護の専門判断は行いません。あくまで「日常の様子の共有」です。</small>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <li>
-      <span class="step">STEP 4</span>
-      <p>
-        決まった時間にこちらからお電話いたします。
-        ゆっくりお話ししましょう。
+  <!-- Pricing -->
+  <section id="pricing">
+    <div class="container">
+      <h2>料金プラン</h2>
+      <p class="lead">
+        シンプルで分かりやすい、<strong>月額の定額プラン</strong>です。  
+        まずは <strong>初回15分の無料体験</strong> からお試しください。
       </p>
-    </li>
-  </ol>
+
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th>プラン</th>
+            <th>回数・時間</th>
+            <th>月額料金（税込）</th>
+            <th>こんな方に</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ライトプラン</td>
+            <td>月4回（週1回）／1回 20分</td>
+            <td class="pricing-highlight">2,000円</td>
+            <td>まずは様子を知りたいご家族向け</td>
+          </tr>
+          <tr>
+            <td>スタンダードプラン</td>
+            <td>月8回（週2回）／1回 20分</td>
+            <td class="pricing-highlight">3,800円</td>
+            <td>こまめに話し相手を用意したい方に</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="pricing-note">
+        ・通話料は、こちらからおかけするため <strong>ご利用者様の負担はありません</strong>。<br>
+        ・お支払い方法は、住信SBIネット銀行にお振込みいただくことになります。<br>
+        ・料金や回数は、ご希望に応じて個別に調整することも可能です。お気軽にご相談ください。
+      </p>
+    </div>
+  </section>
+
+  <!-- Flow -->
+  <section id="flow">
+    <div class="container">
+      <h2>ご利用の流れ</h2>
+      <p class="lead">
+        お申し込みから初回の通話までは、最短で<strong>数日以内</strong>にご案内可能です。
+      </p>
+
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-step-number">STEP 1</div>
+          <div class="flow-step-title">無料体験のお申し込み</div>
+          <p>
+            下部のフォームまたはメールにて、<strong>ご家族の方</strong>からお申し込みください。  
+            ご希望の曜日・時間帯もあわせてお知らせください。
+          </p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-number">STEP 2</div>
+          <div class="flow-step-title">事前ヒアリング</div>
+          <p>
+            ご家族の方に、<strong>ご本人のご性格・体調・話題の好み</strong>などをお伺いします。  
+            無理のない範囲で、楽しく話せるよう準備します。
+          </p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-number">STEP 3</div>
+          <div class="flow-step-title">無料体験の通話</div>
+          <p>
+            実際に15分ほどお話しさせていただき、雰囲気やペースを確認します。  
+            継続をご希望の場合は、そのままプランをご提案します。
+          </p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-number">STEP 4</div>
+          <div class="flow-step-title">本契約・定期通話スタート</div>
+          <p>
+            プラン確定後、定期的にこちらからお電話を差し上げます。  
+            ご希望に応じて、<strong>簡単なご様子レポート</strong>もお送りします。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <h2>よくある質問</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">Q. 通話内容は家族に共有されますか？</div>
+        <div class="faq-a">
+          A. 基本的には、<strong>個人のプライバシーを尊重</strong>し、会話の詳細は共有しません。  
+          ただし、ご家族からご希望があった場合は、<strong>「体調」「生活リズム」「気分」などの概要</strong>を簡単なレポートとしてお伝えします。
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Q. 緊急時にはどうなりますか？</div>
+        <div class="faq-a">
+          A. 医療・介護の専門職ではないため、<strong>緊急対応や診断・指示は行えません</strong>。  
+          通話中に明らかな異変を感じた場合は、事前に伺った緊急連絡先（ご家族など）に速やかにご連絡します。
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Q. 個人情報の取り扱いはどうなっていますか？</div>
+        <div class="faq-a">
+          A. お預かりした情報は、<strong>サービス提供の目的以外には一切使用しません</strong>。  
+          通話内容の録音は原則行わず、必要最低限のメモのみを安全に管理します。
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Q. どんな人が話し相手になりますか？</div>
+        <div class="faq-a">
+          A. 大学生・大学院生などの学生が中心です。  
+          事前に簡単な面談と研修を行い、<strong>敬語・マナー・高齢者とのコミュニケーション</strong>について確認した上で担当します。
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Q. 土日以外は利用できませんか？</div>
+        <div class="faq-a">
+          A. 現在は学業との両立のため、<strong>土日を中心とした運営</strong>となっています。  
+          平日夕方以降など、個別に調整できる場合もありますので、ご希望があればご相談ください。
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Profile -->
+  <section id="profile">
+    <div class="container">
+      <h2>運営者プロフィール</h2>
+      <p class="lead">
+        「自分の祖父母のように、安心して話せる相手でありたい」——  
+        そんな思いから、hanaso を立ち上げました。
+      </p>
+
+      <div class="profile card">
+        <div class="profile-icon">R</div>
+        <div>
+          <div class="profile-meta">運営者</div>
+          <div><strong>りょうすけ</strong>（大学生）</div>
+          <p>
+            祖父母と離れて暮らす中で、「もっと話したいのに、なかなか時間が取れない」というもどかしさを感じていました。  
+            同じような思いを持つご家族の力になれたらと思い、hanaso を個人で運営しています。
+          </p>
+          <p>
+            医療・介護の専門家ではありませんが、<strong>丁寧に耳を傾けること</strong>、<strong>約束の時間を守ること</strong>、  
+            そして何より、<strong>ご本人のペースを大切にすること</strong>を心がけています。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / CTA -->
+  <section id="contact">
+  <div class="container">
+    <h2>お申し込み・お問い合わせ</h2>
+    <p class="lead">
+      メールが難しい方でもご安心ください。  
+      <strong>お電話一本で、すぐに無料体験のご案内ができます。</strong>
+    </p>
+
+    <div class="cta">
+      <div class="cta-title">お電話でのお申し込み</div>
+      <div class="cta-text">
+        ご家族の方からのお電話も大歓迎です。
+      </div>
+
+      <p style="font-size:22px; font-weight:700; margin:10px 0;">
+        📞 <a href="tel:080-8079-9969" style="color:var(--main); text-decoration:none;">
+          080-8079-9969
+        </a>
+      </p>
+
+      <p style="font-size:13px; color:var(--muted); margin-bottom:14px;">
+        受付時間：土日 10:00〜17:00
+      </p>
+
+      <hr style="border:none; border-top:1px solid #eee; margin:16px 0;">
+
+      <div class="cta-title">メールでのお申し込み（ご家族向け）</div>
+      <p style="font-size:14px;">
+        メールが使える方は、こちらからも受け付けています。
+      </p>
+
+      <p style="font-size:14px; font-weight:600;">
+        ✉ ryoosuke4003@gmail.com
+      </p>
+
+      <p style="font-size:12px; color:var(--muted);">
+        ※メールが難しい場合は、すべてお電話で完結できます。
+      </p>
+    </div>
+  </div>
 </section>
 
-<section>
-  <h2>利用規約・注意事項</h2>
-
-  <p>
-    本サービスは、高齢者の方が安心して会話を楽しんでいただくことを目的とした
-    電話サービスです。ご利用前に、以下の内容をご確認ください。
-  </p>
-
-  <ul>
-    <li>本サービスは、会話を目的としたサービスであり、医療・介護・法律・金銭に関する相談や助言は行っておりません。</li>
-    <li>緊急時の対応、安否確認、見守りを保証するサービスではありません。</li>
-    <li>通話はあらかじめ決められた時間内で行います。</li>
-    <li>通話内容の秘密は大切に守りますが、法令に基づき開示が必要な場合はこの限りではありません。</li>
-    <li>通話中に、暴言・迷惑行為・不適切な発言があった場合、通話を中断またはサービス提供を終了することがあります。</li>
-    <li>サービス内容・料金は、予告なく変更する場合があります。</li>
-  </ul>
-
-  <p>
-    本サービスをお申し込みいただいた時点で、上記内容にご同意いただいたものとします。
-  </p>
-</section>
-
-<section>
-  <h2>お問い合わせ</h2>
-
-  <p>
-    サービスについてのご質問やお申し込みは、
-    下記フォームよりお気軽にご連絡ください。
-    ご家族の方からのお問い合わせも歓迎しています。
- 　</p>
-
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd5uYmDUnIWGQHXK-pxczcJkY9UY917Acv7QmoKjGrPyNjgMw/viewform?embedded=true" width="640" height="824" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
-
-<p class="note">
-※現在、学業との両立のため、土曜日・日曜日のみの対応となっております。
-</p>
-
-<p class="limited-message">
-  限られた時間ではありますが、 ひとつひとつのご縁を大切にお話しします。
-</p>
-
- </section>
+</main>
 
 <footer>
-  <p>© 2026 ハナソ</p>
+  <div class="container">
+    <div class="footer-links">
+      <a href="#about">サービス概要</a>
+      <a href="#pricing">料金</a>
+      <a href="#faq">よくある質問</a>
+      <a href="#profile">運営者情報</a>
+    </div>
+    <div>
+      個人運営のため、対応できる件数には限りがあります。あらかじめご了承ください。<br>
+      本サービスは医療行為・介護サービスではなく、「日常会話」と「さりげない見守り」を目的としたものです。
+    </div>
+  </div>
 </footer>
 
 </body>
